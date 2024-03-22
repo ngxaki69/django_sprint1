@@ -1,0 +1,24 @@
+<article>
+    <ul>
+      <li>
+        Место: {{ data.location }}        
+      </li>
+      <li>
+        Дата: {{ data.date }}
+      </li>
+      <li>
+        Категория: <a href="{% url 'blog:category_posts' data.category %}">
+          {{ data.category }}</a>
+      </li>
+    </ul>
+    {% if view_name == "blog:index" %}
+      <p>
+        {{ data.text|truncatewords:10 }}
+      </p>
+        <a href="{% url 'blog:post_detail' data.id%}">Читать полный текст</a>
+    {% else %}
+      <p>
+        {{ data.text }}
+      </p>
+    {% endif %}
+</article>

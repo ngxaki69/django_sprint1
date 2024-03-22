@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import Http404
 # Create your views here.
 
 posts = [
@@ -45,6 +45,8 @@ posts = [
     },
 ]
 
+posts_dict = dict({element['id']: element for element in posts})
+
 
 def index(request):
     template = 'blog/index.html'
@@ -53,9 +55,12 @@ def index(request):
 
 
 def post_detail(request, id):
-    template = 'blog/detail.html'
-    context = {'post': posts[id]}
-    return render(request, template, context)
+    try:
+        template = 'blog/detail.html'
+        context = {'post': posts_dict[id]}
+        return render(request, template, context)
+    except KeyError:
+        raise Http404("Post does not exist")
 
 
 def category_posts(request, category_slug):
