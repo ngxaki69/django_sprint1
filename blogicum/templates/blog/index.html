@@ -6,8 +6,6 @@
   <h1>Лента записей</h1>
     {% for element in post%}
       <hr>
-      {% with request.resolver_match.view_name as view_name %}
-        {% include "includes/post.html" with data=element %}
-      {% endwith %}
+      {% include "includes/post.html" with data=element %}
     {% endfor %}
 {%endblock%}

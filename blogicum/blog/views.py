@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import Http404
-# Create your views here.
 
 posts = [
     {
@@ -60,7 +59,7 @@ def post_detail(request, id):
         context = {'post': posts_dict[id]}
         return render(request, template, context)
     except KeyError:
-        raise Http404("Post does not exist")
+        raise Http404('Post does not exist')
 
 
 def category_posts(request, category_slug):
